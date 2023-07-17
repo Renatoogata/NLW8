@@ -5,16 +5,6 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-ul {
-  list-style: none; /* tirar as bolinhas da ul */
-}
-
 :root {
   /* serve para toda pagina */
 
@@ -25,9 +15,22 @@ ul {
   --brand-beige: hsl(39, 100%, 97%);
   --brand-light: hsl(148, 23%, 89%);
 
+  --bg-light: hsl(180, 14%, 97%);
+
   font-size: 62.5%; /* 1rem = 10px */
 
   --nav-height: 7.2rem;
+}
+
+html {
+  /* deixar o scroll suave */
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -38,6 +41,8 @@ body {
 
   /* não contar a largura da barra de scroll */
   overflow: overlay;
+
+  background-color: var(--bg-light);
 }
 
 .wrapper {
@@ -46,34 +51,39 @@ body {
   padding-inline: 2.4rem;
 }
 
-/*====== HEADER ======*/
-
-header::before {
-  /* fazendo o fundo verde */
-  content: "";
-  width: 100%; /* pega todo width disponivel */
-  height: calc(108rem + var(--nav-height));
-  background-color: var(--brand-light);
-  display: block;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+ul {
+  list-style: none; /* tirar as bolinhas da ul */
 }
 
-header {
-  margin-top: calc(4.1rem + var(--nav-height));
+img {
+  /* respeitar os limites da caixa */
+  max-width: 100%;
 }
 
-header h4 {
+section {
+  padding-block: 10rem;
+}
+
+section header h4 {
   font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0.08rem;
   color: var(--primary-color);
+
+  text-transform: uppercase;
 
   margin-bottom: 1.6rem;
 }
 
-header h1 {
+section hader h2 {
+  font-size: 3rem;
+  line-height: 3.9rem;
+
+  color: var(--headline);
+}
+
+section header h1 {
   font-size: 3.4rem;
   color: var(--headline);
   line-height: 130%;
@@ -81,74 +91,12 @@ header h1 {
   margin-bottom: 2.4rem;
 }
 
-header p {
-  font-size: 1.8rem;
-  line-height: 150%;
+section .content p {
   font-weight: 400;
-  color: var(--paragraph);
-
-  margin-bottom: 3.2rem;
-}
-
-header button {
-  background-color: var(--primary-color);
-
-  border: none;
-  border-radius: 4rem;
-
-  margin-bottom: 6rem;
-
-  height: 6.2rem;
-  width: 26.3rem;
-
-  color: #ffff;
-  font-size: 1.4rem;
-  font-weight: 700;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
-
-  margin-right: auto;
-  margin-left: auto;
-}
-
-header img {
-  width: 26.4rem;
-  display: block;
-  margin-inline: auto;
-  object-position: 0 0rem;
-}
-
-.stats {
-  width: 32.7rem;
-  margin-inline: auto;
-  padding-block: 4rem;
-
-  background-color: var(--brand-beige);
-  border: 1px solid var(--brand-light);
-  border-radius: 0.6rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6rem;
-}
-
-.stat h3 {
-  font-size: 4.8rem;
-  color: var(--headline);
-  line-height: 130%;
-
-  margin-bottom: 0.4rem;
-}
-
-.stat p {
-  margin: 0;
-  color: var(--primary-color);
   font-size: 1.6rem;
   line-height: 150%;
+
+  color: var(--paragraph);
 }
 
 /*====== NAVIGATION ======*/
@@ -159,8 +107,9 @@ nav {
 
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100vw;
+
+  z-index: 100;
 }
 
 nav .wrapper {
@@ -171,11 +120,10 @@ nav .wrapper {
 
 nav.scroll {
   background-color: var(--primary-color);
-  width: 100vw;
 }
 
 /* nav com a class "scroll", svg do primeiro filho */
-nav.scroll svg:nth-child(1) path {
+nav.scroll .logo path {
   fill: white;
 }
 
@@ -197,7 +145,7 @@ body.menu-expanded {
 
 /* desaparecer todos os elementos menos o nav */
 body.menu-expanded > :not(nav) {
-  display: none;
+  visibility: hidden;
 }
 
 .menu,
@@ -213,6 +161,11 @@ body.menu-expanded .close-menu {
   visibility: visible;
 }
 
+.menu {
+  /* jogar o menu para baixo em 100% (ou seja tirar ele da tela para baixo) */
+  transform: translateY(100%);
+}
+
 /* body tem a class menu-expanded e dentro desse body procurar quem tem a class menu(.menu) */
 body.menu-expanded .menu {
   position: fixed;
@@ -224,10 +177,10 @@ body.menu-expanded .menu {
   height: 100vh;
 
   padding-top: var(--nav-height);
-}
 
-body.menu-expanded nav {
-  position: relative;
+  /* fazendo efeito de ao clicar ao menu subir de baixo para cima utilizando o translateY que está definido em 100% para baixo no .menu acima*/
+  transition: transform 300ms;
+  transform: translateY(0);
 }
 
 .menu ul:nth-child(1) {
@@ -285,4 +238,136 @@ body.menu-expanded .logo path {
 /* nav com a class "scroll", svg do segundo filho */
 body.menu-expanded button path {
   stroke: white;
+}
+
+/*====== HOME ======*/
+
+#home {
+  padding-top: calc(4.1rem + var(--nav-height));
+}
+
+#home::before {
+  /* fazendo o fundo verde */
+  content: "";
+  width: 100%; /* pega todo width disponivel */
+  height: calc(108rem + var(--nav-height));
+  background-color: var(--brand-light);
+  display: block;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#home p {
+  font-size: 1.8rem;
+  line-height: 150%;
+  font-weight: 400;
+  color: var(--paragraph);
+
+  margin-bottom: 3.2rem;
+}
+
+#home button {
+  background-color: var(--primary-color);
+
+  border: none;
+  border-radius: 4rem;
+
+  margin-bottom: 6rem;
+
+  height: 6.2rem;
+  width: 26.3rem;
+
+  color: #ffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#home img {
+  width: 26.4rem;
+  display: block;
+  margin-inline: auto;
+  object-position: 0 0rem;
+}
+
+#home .stats {
+  width: 32.7rem;
+  margin-inline: auto;
+  padding-block: 4rem;
+
+  background-color: var(--brand-beige);
+  border: 1px solid var(--brand-light);
+  border-radius: 0.6rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6rem;
+}
+
+#home .stat h3 {
+  font-size: 4.8rem;
+  color: var(--headline);
+  line-height: 130%;
+
+  margin-bottom: 0.4rem;
+}
+
+#home .stat p {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+/*====== SERVICES ======*/
+
+#services header h2 {
+  margin-bottom: 6rem;
+}
+
+#services .cards {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+#services .card {
+  padding: 2.4rem;
+  text-align: left;
+
+  background: white;
+
+  border: 1px solid var(--brand-light);
+  border-radius: 0.6rem;
+}
+
+#services .card h3 {
+  /* margin-block: (marginTop e marginBottom) */
+  margin-block: 1.6rem;
+}
+
+/*====== ABOUT ======*/
+#about {
+  text-align: left;
+  background-color: var(--brand-beige);
+}
+
+#about header h2 {
+  margin-bottom: 2.4rem;
+}
+
+#about .content p {
+  margin-top: 2.4rem;
+  margin-bottom: 6rem;
 }
