@@ -1,10 +1,28 @@
+window.addEventListener("scroll", onScroll)
+
+onScroll()
 function onScroll() {
+  showNavOnScroll()
+  showBackTopTopButtonOnScroll()
+}
+
+function showNavOnScroll() {
   var navigation = document.getElementById("navigation")
 
   if (scrollY > 0) {
     navigation.classList.add("scroll")
   } else {
     navigation.classList.remove("scroll")
+  }
+}
+
+function showBackTopTopButtonOnScroll() {
+  var navigation = document.getElementById("backToTopButton")
+
+  if (scrollY > 500) {
+    navigation.classList.add("show")
+  } else {
+    navigation.classList.remove("show")
   }
 }
 
