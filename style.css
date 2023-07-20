@@ -299,6 +299,7 @@ body.menu-expanded button path {
 /*====== HOME ======*/
 
 #home {
+  padding-block: 0;
   padding-top: calc(4.1rem + var(--nav-height));
 }
 
@@ -306,7 +307,7 @@ body.menu-expanded button path {
   /* fazendo o fundo verde */
   content: "";
   width: 100%; /* pega todo width disponivel */
-  height: calc(70% + var(--nav-height));
+  height: calc(76% + var(--nav-height));
   background-color: var(--brand-light);
   display: block;
 
@@ -497,6 +498,23 @@ footer .social-links {
     display: grid;
   }
 
+  .col-a {
+    grid-area: A;
+  }
+
+  .col-b {
+    grid-area: B;
+  }
+
+  section {
+    padding-block: 16rem;
+  }
+
+  section header h2 {
+    font-size: 4rem;
+    line-height: 5.2rem;
+  }
+
   /*====== NAVIGATION ======*/
   /* reset */
   nav#navigation .wrapper * {
@@ -621,7 +639,7 @@ footer .social-links {
 
   /*====== HOME ======*/
   #home::before {
-    height: calc(86% - var(--nav-height));
+    height: calc(96% - var(--nav-height));
   }
 
   #home {
@@ -636,13 +654,8 @@ footer .social-links {
   }
 
   #home .col-a {
-    grid-area: A;
     text-align: left;
     align-self: center;
-  }
-
-  #home .col-b {
-    grid-area: B;
   }
 
   #home h1 {
@@ -677,5 +690,70 @@ footer .social-links {
 
   #home img {
     width: 42rem;
+  }
+
+  /*====== SERVICES ======*/
+  #services h2 {
+    width: 47rem;
+    margin-inline: auto;
+  }
+
+  #services .cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+
+  #services .card {
+    width: 30%;
+    flex-grow: 1;
+  }
+
+  /*====== ABOUT ======*/
+  #about .wrapper {
+    grid-template-columns: 48rem 1fr;
+    grid-template-areas: "B A";
+    gap: 6.7rem;
+  }
+
+  #about .col-a {
+    align-self: center;
+  }
+
+  #about .content p {
+    margin-bottom: 0;
+  }
+
+  /*====== CONTACT ======*/
+  #contact .wrapper {
+    grid-template-columns: 1fr 57.5rem;
+    grid-template-areas: "A B";
+  }
+
+  #contact h2 {
+    width: 40.4rem;
+  }
+
+  /*====== FOOTER ======*/
+  footer {
+    padding-block: 8rem;
+  }
+
+  footer .wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "A B";
+  }
+
+  footer .col-a {
+    align-self: center;
+  }
+
+  footer .col-b {
+    align-self: center;
+    justify-self: flex-end;
+  }
+
+  footer p {
+    margin-bottom: 0;
   }
 }
